@@ -3,253 +3,408 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>International Relations Final Exam Review</title>
+    <title>🌐 Complete IR Exam Review</title>
     <style>
+        :root {
+            --primary: #4F46E5;
+            --primary-hover: #4338CA;
+            --success: #10B981;
+            --danger: #EF4444;
+            --bg: #F3F4F6;
+            --card-bg: #FFFFFF;
+            --text: #1F2937;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f0f4f8;
-            color: #333;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
             line-height: 1.6;
+            margin: 0;
             padding: 20px;
         }
-        .quiz-container {
-            max-width: 700px;
+
+        .container {
+            max-width: 800px;
             margin: 0 auto;
-            background: #ffffff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
-        h1 {
+
+        header {
             text-align: center;
-            color: #2c3e50;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 10px;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
         }
-        .question-block {
-            margin-bottom: 25px;
-            padding: 15px;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            background-color: #fafafa;
+
+        h1 {
+            color: var(--primary);
+            font-size: 2.5em;
+            margin: 0 0 10px 0;
         }
-        .question-text {
-            font-weight: bold;
+
+        p.subtitle {
+            color: #6B7280;
             font-size: 1.1em;
+            margin: 0;
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            color: var(--primary);
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 10px;
+            margin: 40px 0 20px 0;
+        }
+
+        .question-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .question-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        }
+
+        .question-title {
+            font-weight: 600;
+            font-size: 1.15em;
             margin-bottom: 15px;
-            color: #2c3e50;
         }
-        .options label {
-            display: block;
-            margin-bottom: 10px;
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+
+        .option-label {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            border: 2px solid #E5E7EB;
+            border-radius: 8px;
             cursor: pointer;
-            padding: 8px;
-            border-radius: 5px;
-            transition: background 0.2s;
+            transition: all 0.2s ease;
+            font-size: 1em;
         }
-        .options label:hover {
-            background-color: #e9ecef;
+
+        .option-label:hover {
+            background-color: #F9FAFB;
+            border-color: #D1D5DB;
         }
+
         input[type="radio"] {
-            margin-right: 10px;
+            margin-right: 12px;
+            transform: scale(1.2);
+            accent-color: var(--primary);
+            cursor: pointer;
         }
-        .btn-submit {
+
+        .submit-btn {
             display: block;
             width: 100%;
-            background-color: #3498db;
+            background-color: var(--primary);
             color: white;
             border: none;
-            padding: 15px;
-            font-size: 1.2em;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-        .btn-submit:hover {
-            background-color: #2980b9;
-        }
-        .result-container {
-            display: none;
-            text-align: center;
-            margin-top: 30px;
             padding: 20px;
-            background-color: #e8f8f5;
-            border-radius: 8px;
-            border: 1px solid #27ae60;
+            font-size: 1.3em;
+            font-weight: bold;
+            border-radius: 12px;
+            cursor: pointer;
+            margin-top: 40px;
+            margin-bottom: 40px;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+            box-shadow: 0 4px 6px rgba(79, 70, 229, 0.3);
         }
-        .result-score {
+
+        .submit-btn:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Auto-correct feedback styles */
+        .correct-answer {
+            background-color: #D1FAE5 !important;
+            border-color: var(--success) !important;
+            color: #065F46;
+            font-weight: 600;
+        }
+
+        .wrong-answer {
+            background-color: #FEE2E2 !important;
+            border-color: var(--danger) !important;
+            color: #991B1B;
+        }
+
+        #results {
+            text-align: center;
             font-size: 1.5em;
             font-weight: bold;
-            color: #27ae60;
+            margin-top: 30px;
+            margin-bottom: 50px;
+            padding: 30px;
+            border-radius: 12px;
+            display: none;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        .feedback {
-            font-weight: bold;
-            margin-top: 10px;
-            display: block;
+
+        @keyframes popIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
         }
-        .correct { color: #27ae60; }
-        .incorrect { color: #e74c3c; }
+
+        .score-excellent { background-color: #D1FAE5; color: #065F46; border: 2px solid var(--success); }
+        .score-good { background-color: #FEF3C7; color: #92400E; border: 2px solid #F59E0B; }
+        .score-bad { background-color: #FEE2E2; color: #991B1B; border: 2px solid var(--danger); }
     </style>
 </head>
 <body>
 
-<div class="quiz-container">
-    <h1>International Relations Final Review</h1>
-    <form id="quiz-form">
+<div class="container">
+    <header>
+        <h1>🌐 The Ultimate IR Final Review</h1>
+        <p class="subtitle">110 Questions. Let's see what you've got! Select your answers and hit submit at the bottom to auto-grade.</p>
+    </header>
+
+    <form id="quizForm">
+        <h2 class="section-title">Part I: Multiple Choice Questions</h2>
+        <div id="mcqContainer"></div>
         
-        <h3>Part I: Multiple Choice</h3>
-        
-        <div class="question-block" data-answer="d">
-            <div class="question-text">1. The study of International Relations as an organized academic discipline formally began in the:</div>
-            <div class="options">
-                <label><input type="radio" name="q1" value="a"> a) Seventeenth century</label>
-                <label><input type="radio" name="q1" value="b"> b) Eighteenth century</label>
-                <label><input type="radio" name="q1" value="c"> c) Nineteenth century</label>
-                <label><input type="radio" name="q1" value="d"> d) Twentieth century</label>
-            </div>
-            <div class="feedback"></div>
-        </div>
+        <h2 class="section-title">Part II: True / False Questions</h2>
+        <div id="tfContainer"></div>
 
-        <div class="question-block" data-answer="c">
-            <div class="question-text">2. Which event served as the major catalyst for the institutionalization of International Relations as a discipline?</div>
-            <div class="options">
-                <label><input type="radio" name="q2" value="a"> a) The French Revolution</label>
-                <label><input type="radio" name="q2" value="b"> b) The Industrial Revolution</label>
-                <label><input type="radio" name="q2" value="c"> c) World War I</label>
-                <label><input type="radio" name="q2" value="d"> d) World War II</label>
-            </div>
-            <div class="feedback"></div>
-        </div>
-
-        <div class="question-block" data-answer="c">
-            <div class="question-text">3. Sovereignty primarily refers to a state's:</div>
-            <div class="options">
-                <label><input type="radio" name="q3" value="a"> a) Military strength</label>
-                <label><input type="radio" name="q3" value="b"> b) Economic independence</label>
-                <label><input type="radio" name="q3" value="c"> c) Supreme authority within its territory</label>
-                <label><input type="radio" name="q3" value="d"> d) International reputation</label>
-            </div>
-            <div class="feedback"></div>
-        </div>
-
-        <div class="question-block" data-answer="c">
-            <div class="question-text">4. Which of the following best labels an Inter-Governmental Organization?</div>
-            <div class="options">
-                <label><input type="radio" name="q4" value="a"> a) A private voluntary association</label>
-                <label><input type="radio" name="q4" value="b"> b) A corporation operating internationally</label>
-                <label><input type="radio" name="q4" value="c"> c) A cooperative institution formed by states</label>
-                <label><input type="radio" name="q4" value="d"> d) A cultural exchange body</label>
-            </div>
-            <div class="feedback"></div>
-        </div>
-
-        <div class="question-block" data-answer="c">
-            <div class="question-text">5. The individual level of analysis in IR focuses mainly on:</div>
-            <div class="options">
-                <label><input type="radio" name="q5" value="a"> a) Global power structures</label>
-                <label><input type="radio" name="q5" value="b"> b) International institutions</label>
-                <label><input type="radio" name="q5" value="c"> c) Leaders' personalities and perceptions</label>
-                <label><input type="radio" name="q5" value="d"> d) Economic systems</label>
-            </div>
-            <div class="feedback"></div>
-        </div>
-
-        <h3>Part II: True / False</h3>
-
-        <div class="question-block" data-answer="false">
-            <div class="question-text">6. The Peace of Westphalia removed all forms of religious conflict in Europe.</div>
-            <div class="options">
-                <label><input type="radio" name="q6" value="true"> True</label>
-                <label><input type="radio" name="q6" value="false"> False</label>
-            </div>
-            <div class="feedback"></div>
-        </div>
-
-        <div class="question-block" data-answer="true">
-            <div class="question-text">7. World War I played a crucial role in shaping early IR theory & institutions.</div>
-            <div class="options">
-                <label><input type="radio" name="q7" value="true"> True</label>
-                <label><input type="radio" name="q7" value="false"> False</label>
-            </div>
-            <div class="feedback"></div>
-        </div>
-
-        <div class="question-block" data-answer="false">
-            <div class="question-text">8. Sovereign states recognize a higher external authority over their internal affairs.</div>
-            <div class="options">
-                <label><input type="radio" name="q8" value="true"> True</label>
-                <label><input type="radio" name="q8" value="false"> False</label>
-            </div>
-            <div class="feedback"></div>
-        </div>
-
-        <div class="question-block" data-answer="true">
-            <div class="question-text">9. Territory in international law includes land, airspace, and coastal waters.</div>
-            <div class="options">
-                <label><input type="radio" name="q9" value="true"> True</label>
-                <label><input type="radio" name="q9" value="false"> False</label>
-            </div>
-            <div class="feedback"></div>
-        </div>
-
-        <div class="question-block" data-answer="true">
-            <div class="question-text">10. The United Nations is an example of a multipurpose IGO.</div>
-            <div class="options">
-                <label><input type="radio" name="q10" value="true"> True</label>
-                <label><input type="radio" name="q10" value="false"> False</label>
-            </div>
-            <div class="feedback"></div>
-        </div>
-
-        <button type="button" class="btn-submit" onclick="submitQuiz()">Submit Quiz</button>
+        <button type="button" class="submit-btn" onclick="gradeQuiz()">Submit & Auto-Correct 🚀</button>
     </form>
 
-    <div id="result-container" class="result-container">
-        <div class="result-score" id="result-score"></div>
-        <p>Review your answers above.</p>
-        <button type="button" class="btn-submit" style="margin-top: 15px; background-color: #7f8c8d;" onclick="location.reload()">Retake Quiz</button>
-    </div>
+    <div id="results"></div>
 </div>
 
 <script>
-    function submitQuiz() {
-        let score = 0;
-        let totalQuestions = document.querySelectorAll('.question-block').length;
-        let questionBlocks = document.querySelectorAll('.question-block');
+    const mcqData = [
+        { id: "m1", q: "1. The study of International Relations as an organized academic discipline formally began in the:", o: {"a": "Seventeenth century", "b": "Eighteenth century", "c": "Nineteenth century", "d": "Twentieth century"}, c: "d" },
+        { id: "m2", q: "2. Which event served as the major catalyst for the institutionalization of International Relations as a discipline?", o: {"a": "The French Revolution", "b": "The Industrial Revolution", "c": "World War I", "d": "World War II"}, c: "c" },
+        { id: "m3", q: "3. Sovereignty primarily refers to a state's:", o: {"a": "Military strength", "b": "Economic independence", "c": "Supreme authority within its territory", "d": "International reputation"}, c: "c" },
+        { id: "m4", q: "4. Which of the following best labels an Inter-Governmental Organization?", o: {"a": "A private voluntary association", "b": "A corporation operating internationally", "c": "A cooperative institution formed by states", "d": "A cultural exchange body"}, c: "c" },
+        { id: "m5", q: "5. The individual level of analysis in IR focuses mainly on:", o: {"a": "Global power structures", "b": "International institutions", "c": "Leaders' personalities and perceptions", "d": "Economic systems"}, c: "c" },
+        { id: "m6", q: "6. The state level of analysis emphasizes:", o: {"a": "Individual psychology", "b": "Internal characteristics of states", "c": "International anarchy", "d": "Global governance"}, c: "b" },
+        { id: "m7", q: "7. The sovereign state in modern international politics is best described as:", o: {"a": "A religious authority", "b": "A culturally unified society", "c": "A legally recognized authority over a defined territory", "d": "A military alliance"}, c: "c" },
+        { id: "m8", q: "8. Sovereignty primarily refers to:", o: {"a": "Economic self-sufficiency", "b": "Freedom from external political authority", "c": "Cultural homogeneity", "d": "Military strength"}, c: "b" },
+        { id: "m9", q: "9. The League of Nations primarily sought to promote:", o: {"a": "Imperial expansion", "b": "Collective security", "c": "Military alliances", "d": "Economic nationalism"}, c: "b" },
+        { id: "m10", q: "10. Machiavelli's principal argument in The Prince was:", o: {"a": "Morality should govern state actions", "b": "The prince must prioritize state survival over morals", "c": "International organizations ensure peace", "d": "War is unnecessary in a well-ordered system"}, c: "b" },
+        { id: "m11", q: "11. Realists consider which of the following as the most important actor in international relations?", o: {"a": "NGOs", "b": "States", "c": "International organizations", "d": "Individuals"}, c: "b" },
+        { id: "m12", q: "12. Liberalism in IR emphasizes:", o: {"a": "Power and survival", "b": "Cooperation, institutions, and human welfare", "c": "Anarchy as the natural state", "d": "Military force as the main tool"}, c: "b" },
+        { id: "m13", q: "13. Constructivist theory focuses on:", o: {"a": "Material power and military capabilities", "b": "Shared ideas, norms, and social interactions", "c": "The inevitability of war", "d": "National self-interest above all"}, c: "b" },
+        { id: "m14", q: "14. The concept of 'balance of terror' is linked to:", o: {"a": "Colonial expansion", "b": "Economic sanctions", "c": "Nuclear deterrence", "d": "Collective security"}, c: "c" },
+        { id: "m15", q: "15. One major criticism of realism is that it:", o: {"a": "Ignores security", "b": "Overemphasizes morality", "c": "Oversimplifies complex global politics", "d": "Rejects empirical analysis"}, c: "c" },
+        { id: "m16", q: "16. Realism in International Relations primarily emphasizes the study of:", o: {"a": "International law", "b": "Global institutions", "c": "State interaction through power", "d": "Moral philosophy"}, c: "c" },
+        { id: "m17", q: "17. From a systems theory perspective, the global system is best described as:", o: {"a": "A collection of isolated sovereign states", "b": "An integrated whole of interdependent actors and institutions", "c": "A hierarchy dominated by a single power", "d": "A legal framework governed only by international law"}, c: "b" },
+        { id: "m18", q: "18. The Peace of Westphalia (1648) is most closely associated with:", o: {"a": "Balance of power", "b": "Colonial expansion", "c": "Sovereign equality of states", "d": "Collective security"}, c: "c" },
+        { id: "m19", q: "19. The Cold War is best described as:", o: {"a": "Direct military confrontation between superpowers", "b": "Ideological and strategic rivalry without full-scale war", "c": "Economic competition only", "d": "A regional conflict in Europe"}, c: "b" },
+        { id: "m20", q: "20. Which organization was created to prevent future wars after World War I?", o: {"a": "United Nations", "b": "NATO", "c": "League of Nations", "d": "Warsaw Pact"}, c: "c" },
+        { id: "m21", q: "21. Foreign policy is primarily concerned with:", o: {"a": "Domestic governance", "b": "Internal law-making", "c": "A state's interaction with the external environment", "d": "Cultural exchange only"}, c: "c" },
+        { id: "m22", q: "22. Which of the following is NOT a determinant of foreign policy?", o: {"a": "Geography", "b": "Historical experience", "c": "Domestic political structure", "d": "Climate change exclusively"}, c: "d" },
+        { id: "m23", q: "23. International law primarily regulates:", o: {"a": "Domestic politics", "b": "Relations among states and other international actors", "c": "Individual morality", "d": "Cultural traditions"}, c: "b" },
+        { id: "m24", q: "24. Diplomacy is best defined as:", o: {"a": "The use of force in foreign relations", "b": "The management of international relations through negotiation", "c": "Economic competition between states", "d": "Cultural globalization"}, c: "b" },
+        { id: "m25", q: "25. Diplomatic immunity is primarily intended to:", o: {"a": "Elevate diplomats above the law", "b": "Protect personal interests of diplomats", "c": "Ensure effective performance of diplomatic functions", "d": "Promote economic cooperation"}, c: "c" },
+        { id: "m26", q: "26. National morale influences:", o: {"a": "Only economic growth", "b": "Public support for government and foreign policy", "c": "Geography", "d": "Industrial output only"}, c: "b" },
+        { id: "m27", q: "27. Balance of Power is designed to:", o: {"a": "Eliminate power", "b": "Maintain stability by preventing one state from dominating", "c": "Support small states exclusively", "d": "Promote global economic integration"}, c: "b" },
+        { id: "m28", q: "28. Which of the following is a Balance of Power strategy?", o: {"a": "Divide and rule", "b": "Complete disarmament", "c": "Isolationism only", "d": "Economic aid"}, c: "a" },
+        { id: "m29", q: "29. Globalization challenges the traditional Balance of Power theory because:", o: {"a": "Military power is now irrelevant", "b": "States are interdependent and interconnected", "c": "Alliances no longer exist", "d": "Geography is meaningless"}, c: "b" },
+        { id: "m30", q: "30. National interest primarily revolves around a state's concern for:", o: {"a": "Ideological dominance", "b": "Cultural expansion", "c": "Survival and safety", "d": "Moral leadership"}, c: "c" },
+        { id: "m31", q: "31. Which theory best explains the pursuit of national interest according to the text?", o: {"a": "Liberalism", "b": "Constructivism", "c": "Realism", "d": "Marxism"}, c: "c" },
+        { id: "m32", q: "32. Economic interests of a state include all EXCEPT:", o: {"a": "Access to international markets", "b": "Protection of domestic industries", "c": "Promotion of religious ideology", "d": "Attraction of foreign investment"}, c: "c" },
+        { id: "m33", q: "33. National security interests are primarily concerned with:", o: {"a": "Cultural identity", "b": "External threats", "c": "Environmental protection", "d": "Humanitarian aid"}, c: "b" },
+        { id: "m34", q: "34. Which organ of the UN is primarily responsible for maintaining international peace and security?", o: {"a": "General Assembly", "b": "ECOSOC", "c": "Security Council", "d": "Secretariat"}, c: "c" },
+        { id: "m35", q: "35. ASEAN was established mainly to promote:", o: {"a": "Military dominance", "b": "Regional cooperation", "c": "Colonial administration", "d": "Global governance"}, c: "b" },
+        { id: "m36", q: "36. Conflict differs from war in that conflict:", o: {"a": "Occurs only between states", "b": "Always involves armed forces", "c": "Can occur within a state", "d": "Is always violent"}, c: "c" },
+        { id: "m37", q: "37. International security traditionally focused on:", o: {"a": "Human rights", "b": "Military capability", "c": "Environmental sustainability", "d": "Cultural survival"}, c: "b" },
+        { id: "m38", q: "38. Globalization has intensified security threats mainly because:", o: {"a": "Borders have strengthened", "b": "States are more isolated", "c": "Threats transcend national boundaries", "d": "Military power has declined"}, c: "c" },
+        { id: "m39", q: "39. Power in international relations is best understood as:", o: {"a": "Moral authority", "b": "Legal legitimacy", "c": "Ability to influence others", "d": "Economic wealth alone"}, c: "c" },
+        { id: "m40", q: "40. The rise of regional blocs suggests:", o: {"a": "The decline of state power", "b": "A unipolar world", "c": "Changing global power configurations", "d": "The end of international cooperation"}, c: "c" },
+        { id: "m41", q: "41. The Bretton Woods system linked the U.S. dollar to:", o: {"A": "Gold", "B": "British Pound", "C": "Euro", "D": "Silver"}, c: "A" },
+        { id: "m42", q: "42. Which international institution was created in 1995 to govern global trade?", o: {"A": "IMF", "B": "World Bank", "C": "WTO", "D": "G20"}, c: "C" },
+        { id: "m43", q: "43. Which period marked the rise of multipolarity with the integration of China into global production networks?", o: {"A": "1980-1990", "B": "1991-2000", "C": "2001-2008", "D": "2017-2024"}, c: "C" },
+        { id: "m44", q: "44. The global financial crisis of 2008 led to:", o: {"A": "A strengthening of Western hegemony", "B": "Increased faith in Bretton Woods institutions", "C": "Greater economic power for new economies", "D": "Complete collapse of trade"}, c: "C" },
+        { id: "m45", q: "45. The key driver of Western industrialization in the early recent period was:", o: {"A": "Cultural homogeneity", "B": "Geographic marginality", "C": "Military and technological competition", "D": "Isolationist policies"}, c: "C" },
+        { id: "m46", q: "46. The rise of economic nationalism & trade wars between 2017-2024 mainly affected:", o: {"A": "Emerging states only", "B": "Multilateral liberal economic institutions", "C": "Military alliances", "D": "Climate policies"}, c: "B" },
+        { id: "m47", q: "47. The G20 became significant after 2008 mainly because:", o: {"A": "It replaced the UN", "B": "It coordinated global economic stability", "C": "It established free trade", "D": "It abolished Bretton Woods institutions"}, c: "B" },
+        { id: "m48", q: "48. Which factor is NOT considered a source of power for a state?", o: {"A": "Geography", "B": "Population", "C": "Culture only", "D": "Military strength"}, c: "C" },
+        { id: "m49", q: "49. Which statement best explains the link between trade leadership & global power centers?", o: {"A": "States leading in free trade are always politically weak", "B": "Trade leadership often reinforces a state's global power status", "C": "Trade leadership is unrelated to power", "D": "Military strength always comes after trade leadership"}, c: "B" }
+    ];
 
-        questionBlocks.forEach((block) => {
-            let correctAnswer = block.getAttribute('data-answer');
-            let selectedOption = block.querySelector('input[type="radio"]:checked');
-            let feedbackDiv = block.querySelector('.feedback');
+    const tfData = [
+        { id: "t1", q: "1. The Peace of Westphalia removed all forms of religious conflict in Europe.", c: "False" },
+        { id: "t2", q: "2. World War I played a crucial role in shaping early IR theory & institutions.", c: "True" },
+        { id: "t3", q: "3. Sovereign states recognize a higher external authority over their internal affairs.", c: "False" },
+        { id: "t4", q: "4. Territory in international law includes land, airspace, and coastal waters.", c: "True" },
+        { id: "t5", q: "5. The skill to enter relations with other states is a key part of sovereignty.", c: "True" },
+        { id: "t6", q: "6. The United Nations is an example of a multipurpose IGO.", c: "True" },
+        { id: "t7", q: "7. NGOs are always neutral and humanitarian in nature.", c: "False" },
+        { id: "t8", q: "8. ECOSOC's authority over NGOs is outlined in Article 71 of the UN Charter.", c: "True" },
+        { id: "t9", q: "9. Levels of analysis help scholars organize explanations of global events.", c: "True" },
+        { id: "t10", q: "10. The individual level of analysis ignores leaders' beliefs and perceptions.", c: "False" },
+        { id: "t11", q: "11. The state level of analysis considers regime type and economic structure.", c: "True" },
+        { id: "t12", q: "12. International law governs individuals directly.", c: "False" },
+        { id: "t13", q: "13. Diplomacy predates the modern state system.", c: "True" },
+        { id: "t14", q: "14. The League of Nations included the USA as a permanent member.", c: "False" },
+        { id: "t15", q: "15. Collective security means an attack on one is an attack on all.", c: "True" },
+        { id: "t16", q: "16. Realism assumes that international law and moral principles are largely ineffective in guiding state behavior.", c: "True" },
+        { id: "t17", q: "17. Classical Realists believe the structure of the international system is the main driver of conflict.", c: "False" },
+        { id: "t18", q: "18. Neorealism emphasizes anarchy as the primary cause of state insecurity.", c: "True" },
+        { id: "t19", q: "19. Liberalism posits that peace and cooperation are achievable through institutions and democratic norms.", c: "True" },
+        { id: "t20", q: "20. Constructivists argue that state identities & interests are socially constructed.", c: "True" },
+        { id: "t21", q: "21. Realism views international politics as governed by objective laws rooted in human nature.", c: "True" },
+        { id: "t22", q: "22. Anarchy in international relations implies chaos and disorder.", c: "False" },
+        { id: "t23", q: "23. Realism assumes states are the only relevant actors in world politics.", c: "False" },
+        { id: "t24", q: "24. Structural realism denies the importance of human nature.", c: "True" },
+        { id: "t25", q: "25. The global system assumes continuous interaction among its actors.", c: "True" },
+        { id: "t26", q: "26. The Cold War involved frequent direct military clashes between the U.S. & USSR.", c: "False" },
+        { id: "t27", q: "27. The League of Nations successfully prevented World War II.", c: "False" },
+        { id: "t28", q: "28. The balance of power was a guiding principle of the Concert of Europe.", c: "True" },
+        { id: "t29", q: "29. Foreign policy is static and unaffected by domestic factors.", c: "False" },
+        { id: "t30", q: "30. Sovereignty is a foundational principle of foreign policy.", c: "True" },
+        { id: "t31", q: "31. International law emerged independently of international relations.", c: "False" },
+        { id: "t32", q: "32. Hugo Grotius is regarded as the father of modern international law.", c: "True" },
+        { id: "t33", q: "33. Diplomacy and foreign policy are identical concepts.", c: "False" },
+        { id: "t34", q: "34. Diplomatic missions exist to advance the interests of the sending state.", c: "True" },
+        { id: "t35", q: "35. The Cold War ended primarily due to military defeat of the Soviet Union.", c: "False" },
+        { id: "t36", q: "36. The post-Cold War era has been free from conflict and insecurity.", c: "False" },
+        { id: "t37", q: "37. National interest is static and does not change over time.", c: "False" },
+        { id: "t38", q: "38. Foreign policy is an extension of a state's national interest.", c: "True" },
+        { id: "t39", q: "39. Economic strength contributes to a state's welfare and security.", c: "True" },
+        { id: "t40", q: "40. Cultural interests are irrelevant to international relations.", c: "False" },
+        { id: "t41", q: "41. The UN Charter serves as the constitutional document of the UN.", c: "True" },
+        { id: "t42", q: "42. The General Assembly has binding decision-making authority over all states.", c: "False" },
+        { id: "t43", q: "43. ECOSOC focuses on economic, social, and developmental issues.", c: "True" },
+        { id: "t44", q: "44. Regionalism emerged mainly after the Cold War.", c: "False" },
+        { id: "t45", q: "45. Conflict always leads to war.", c: "False" },
+        { id: "t46", q: "46. War can only occur between sovereign states.", c: "False" },
+        { id: "t47", q: "47. Security now includes non-military threats such as environmental risks.", c: "True" },
+        { id: "t48", q: "48. Globalization has reduced interdependence among states.", c: "False" },
+        { id: "t49", q: "49. Power dynamics in IR are fixed and unchanging.", c: "False" },
+        { id: "t50", q: "50. Multilateral cooperation is essential for solving global problems.", c: "True" },
+        { id: "t51", q: "51. Britain became the world's financial and trade leader in the 19th century.", c: "True" },
+        { id: "t52", q: "52. The Napoleonic Wars permanently destroyed France's power.", c: "False" },
+        { id: "t53", q: "53. The Bretton Woods system ended when the dollar could no longer be exchanged for gold in 1971.", c: "True" },
+        { id: "t54", q: "54. The 1980s neoliberal reforms strengthened Bretton Woods institutions universally.", c: "False" },
+        { id: "t55", q: "55. China's accession to the WTO in 2001 contributed to multipolar economic trends.", c: "True" },
+        { id: "t56", q: "56. The 2008 financial crisis increased confidence in Western-led financial markets.", c: "False" },
+        { id: "t57", q: "57. Economic nationalism between 2017-2024 reduced trust in multilateral institutions.", c: "True" },
+        { id: "t58", q: "58. The USA remained a system-builder rather than a competitor post-2025.", c: "False" },
+        { id: "t59", q: "59. Colonial resources were vital to industrial powers mostly for their labor force.", c: "False" },
+        { id: "t60", q: "60. Europe's industrial growth allowed the USA to rise as a global power in the late 19th century.", c: "True" },
+        { id: "t61", q: "61. Trump's second term post-2025 further fragmented global economic power.", c: "True" }
+    ];
+
+    const allQuestions = [...mcqData, ...tfData];
+
+    function renderQuestion(item, containerId) {
+        const container = document.getElementById(containerId);
+        const card = document.createElement('div');
+        card.className = 'question-card';
+        
+        const questionTitle = document.createElement('div');
+        questionTitle.className = 'question-title';
+        questionTitle.innerText = item.q;
+        card.appendChild(questionTitle);
+
+        const optionsGrid = document.createElement('div');
+        optionsGrid.className = 'options-grid';
+        optionsGrid.id = `options-${item.id}`;
+
+        const isTF = item.id.startsWith('t');
+        const optionsObj = isTF ? { "True": "True", "False": "False" } : item.o;
+
+        for (const [key, value] of Object.entries(optionsObj)) {
+            const label = document.createElement('label');
+            label.className = 'option-label';
+            label.id = `label-${item.id}-${key}`;
+            
+            const input = document.createElement('input');
+            input.type = 'radio';
+            input.name = item.id;
+            input.value = key;
+
+            label.appendChild(input);
+            label.appendChild(document.createTextNode(isTF ? value : `${key}) ${value}`));
+            optionsGrid.appendChild(label);
+        }
+
+        card.appendChild(optionsGrid);
+        container.appendChild(card);
+    }
+
+    function buildQuiz() {
+        mcqData.forEach(item => renderQuestion(item, 'mcqContainer'));
+        tfData.forEach(item => renderQuestion(item, 'tfContainer'));
+    }
+
+    function gradeQuiz() {
+        let score = 0;
+
+        allQuestions.forEach((item) => {
+            const selectedOption = document.querySelector(`input[name="${item.id}"]:checked`);
+            const allLabels = document.querySelectorAll(`[id^="label-${item.id}-"]`);
+            
+            // Reset previous styling
+            allLabels.forEach(label => {
+                label.classList.remove('correct-answer', 'wrong-answer');
+            });
 
             if (selectedOption) {
-                if (selectedOption.value === correctAnswer) {
+                const userAnswer = selectedOption.value;
+                const userLabel = document.getElementById(`label-${item.id}-${userAnswer}`);
+                const correctLabel = document.getElementById(`label-${item.id}-${item.c}`);
+
+                if (userAnswer === item.c) {
                     score++;
-                    feedbackDiv.innerHTML = "✓ Correct!";
-                    feedbackDiv.className = "feedback correct";
-                    block.style.borderColor = "#27ae60";
+                    userLabel.classList.add('correct-answer');
                 } else {
-                    feedbackDiv.innerHTML = "✗ Incorrect. The correct answer was " + correctAnswer.toUpperCase() + ".";
-                    feedbackDiv.className = "feedback incorrect";
-                    block.style.borderColor = "#e74c3c";
+                    userLabel.classList.add('wrong-answer');
+                    correctLabel.classList.add('correct-answer');
                 }
             } else {
-                feedbackDiv.innerHTML = "✗ No answer selected. The correct answer was " + correctAnswer.toUpperCase() + ".";
-                feedbackDiv.className = "feedback incorrect";
-                block.style.borderColor = "#e74c3c";
+                // Not answered, highlight correct
+                const correctLabel = document.getElementById(`label-${item.id}-${item.c}`);
+                correctLabel.classList.add('correct-answer');
             }
-            
-            // Disable inputs after submission
-            let inputs = block.querySelectorAll('input');
-            inputs.forEach(input => input.disabled = true);
         });
 
-        // Display Results
-        document.getElementById('result-container').style.display = 'block';
-        document.getElementById('result-score').innerText = `You scored ${score} out of ${totalQuestions}!`;
-        document.querySelector('.btn-submit').style.display = 'none'; // Hide submit button
+        // Show Results
+        const resultsDiv = document.getElementById('results');
+        resultsDiv.style.display = 'block';
+        const percentage = Math.round((score / allQuestions.length) * 100);
+        
+        resultsDiv.innerText = `You scored ${score} out of ${allQuestions.length} (${percentage}%)`;
+        
+        if (percentage >= 90) {
+            resultsDiv.className = 'score-excellent';
+            resultsDiv.innerText += " 🏆 Outstanding! You're ready for the exam.";
+        } else if (percentage >= 70) {
+            resultsDiv.className = 'score-good';
+            resultsDiv.innerText += " 👍 Solid effort! Review the missed questions and you'll be golden.";
+        } else {
+            resultsDiv.className = 'score-bad';
+            resultsDiv.innerText += " 📚 Looks like you need a bit more study time. Keep at it!";
+        }
+
+        resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
+
+    // Initialize
+    buildQuiz();
 </script>
 
 </body>

@@ -185,7 +185,7 @@
         <h2 class="section-title">Part II: True / False Questions</h2>
         <div id="tfContainer"></div>
 
-        <button type="button" class="submit-btn" onclick="gradeQuiz()">Submit & Auto-Correct 🚀</button>
+        <button type="button" class="submit-btn" onclick="gradeQuiz()">Submit 🚀</button>
     </form>
 
     <div id="results"></div>
@@ -391,13 +391,13 @@
         
         if (percentage >= 90) {
             resultsDiv.className = 'score-excellent';
-            resultsDiv.innerText += " 🏆 Outstanding! You're ready for the exam.";
+            resultsDiv.innerText += " 🏆 GOOD JOB NIGGA, U R READY FOR EXAM.";
         } else if (percentage >= 70) {
             resultsDiv.className = 'score-good';
-            resultsDiv.innerText += " 👍 Solid effort! Review the missed questions and you'll be golden.";
+            resultsDiv.innerText += " 👍 NICE NIGGA, GO REVIEW UR MISTAKES.";
         } else {
             resultsDiv.className = 'score-bad';
-            resultsDiv.innerText += " 📚 Looks like you need a bit more study time. Keep at it!";
+            resultsDiv.innerText += " 📚 NIGGA UR GOING TO FAIL!";
         }
 
         resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
